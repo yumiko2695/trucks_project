@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import Carrier from './Carrier'
-import {FormGroup, Label, FormText, Table, CustomInput} from 'reactstrap'
+import {FormGroup, Label, Table, FormText, CustomInput} from 'reactstrap'
 import {
   Switch,
   Route,
@@ -149,31 +149,33 @@ function DataTable(props) {
         <DatePicker id="end-datepicker" value={endDate} onChange={(v,f) => setEndDate(v)}  showClearButton={false} showTodayButton={true}/>
       </FormGroup>
       </div>
-      <Table>
+      <Table bordered striped>
       <thead>
         <tr>
-          <th>#</th>
-          <th>Carrier Name <div><button onClick={handleClick} value='carrierAscending'>v</button><button onClick={handleClick} value='carrierDescending'>^</button></div></th>
-          <th>Total Distance <div><button onClick={handleClick} value='totalDistanceAscending'>v</button><button onClick={handleClick} value='totalDistanceDescending'>^</button></div></th>
-          <th>Average CO2 Emissions <div><button onClick={handleClick} value='averageCO2Ascending'>v</button><button onClick={handleClick}value='averageCO2Descending'>^</button></div></th>
-          <th>Average Weight <div><button onClick={handleClick} value='averageWeightAscending'>v</button><button onClick={handleClick} value='averageWeightDescending'>^</button></div></th>
-          <th>Average Intensity<div><button onClick={handleClick} value='averageIntensityAscending'>v</button><button onClick={handleClick}value='averageIntensityDescending'>^</button></div></th>
+          <th style={{ color: '#00a295' }}>#</th>
+          <th style={{ color: '#00a295' }}>Carrier Name <div><button onClick={handleClick} value='carrierAscending'>v</button><button onClick={handleClick} value='carrierDescending'>^</button></div></th>
+          <th style={{ color: '#00a295' }}>Total Distance <div><button onClick={handleClick} value='totalDistanceAscending'>v</button><button onClick={handleClick} value='totalDistanceDescending'>^</button></div></th>
+          <th style={{ color: '#00a295' }}>Average CO2 Emissions <div><button onClick={handleClick} value='averageCO2Ascending'>v</button><button onClick={handleClick}value='averageCO2Descending'>^</button></div></th>
+          <th style={{ color: '#00a295' }}>Average Weight <div><button onClick={handleClick} value='averageWeightAscending'>v</button><button onClick={handleClick} value='averageWeightDescending'>^</button></div></th>
+          <th style={{ color: '#00a295' }}>Average Intensity<div><button onClick={handleClick} value='averageIntensityAscending'>v</button><button onClick={handleClick}value='averageIntensityDescending'>^</button></div></th>
         </tr>
+        </thead>
         {groupedTableData ? groupedTableData.map((row, index) => {
           return (
+        <tbody>
           <tr key={index}>
-          <td>{index}</td>
+          <th scope="row">{index}</th>
           <td><Link to={`/carrier/${row.carrier_company_id}`}>{row.carrier_company_id}</Link></td>
           <td>{row.totalDistance}</td>
           <td>{row.averageCO2}</td>
           <td>{row.averageWeight}</td>
           <td>{row.averageIntensity}</td>
         </tr>
+        </tbody>
         )
       }) : <div></div>
         }
 
-      </thead>
       </Table>
     </div>
   );
